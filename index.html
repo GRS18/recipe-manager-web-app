@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Recipe Manager</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <meta name="description" content="Recipe Manager using Local Storage — create, read, update, delete recipes." />
+</head>
+<body>
+  <header class="app-header">
+    <div class="container header-inner">
+      <h1 class="logo">Recipe Manager</h1>
+      <div class="header-actions">
+        <input id="search" class="search" type="search" placeholder="Search by title..." aria-label="Search recipes by title" />
+        <select id="difficulty" class="select" aria-label="Filter by difficulty">
+          <option value="All">All</option>
+          <option value="Easy">Easy</option>
+          <option value="Medium">Medium</option>
+          <option value="Hard">Hard</option>
+        </select>
+        <input id="maxTime" class="small-input" type="number" min="0" placeholder="Max prep (min)" title="Filter by max prep time in minutes" />
+        <button id="btnAdd" class="btn primary">+ Add Recipe</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section id="listSection" class="list-section">
+      <div id="cardsGrid" class="cards-grid" aria-live="polite"></div>
+      <div id="emptyState" class="empty-state" hidden>
+        <p>No recipes found. Add your first recipe!</p>
+        <button id="btnAddEmpty" class="btn primary">Add Recipe</button>
+      </div>
+    </section>
+  </main>
+
+  <!-- Detail Modal -->
+  <div id="detailModal" class="modal" aria-hidden="true">
+    <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="detailTitle">
+      <button class="modal-close" id="detailClose" aria-label="Close">✕</button>
+      <article id="detailContent"></article>
+    </div>
+  </div>
+
+  <!-- Form Modal (Add / Edit) -->
+  <div id="formModal" class="modal" aria-hidden="true">
+    <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="formTitle">
+      <button class="modal-close" id="formClose" aria-label="Close">✕</button>
+      <form id="recipeForm" class="recipe-form" novalidate>
+        <h2 id="formTitle">Add Recipe</h2>
+        <input type="hidden" id="recipeId" />
+        <label>Title <input id="title" required /></label>
+        <small class="error" data-for="title"></small>
+
+        <label>Description <textarea id="description" rows="3"></textarea></label>
+        <small class="error" data-for="description"></small>
+
+        <label>Ingredients (one per line) <textarea id="ingredients" rows="4" placeholder="e.g. 1 cup flour"></textarea></label>
+        <small class="error" data-for="ingredients"></small>
+
+        <label>Steps (one per line) <textarea id="steps" rows="5" placeholder="Step 1..."></textarea></label>
+        <small class="error" data-for="steps"></small>
+
+        <div class="two-col">
+          <label>Prep time (min) <input id="prepTime" type="number" min="0" required /></label>
+          <label>Cook time (min) <input id="cookTime" type="number" min="0" required /></label>
+        </div>
+        <small class="error" data-for="time"></small>
+
+        <label>Difficulty
+          <select id="difficultySelect" required>
+            <option value="">Select difficulty</option>
+            <option>Easy</option>
+            <option>Medium</option>
+            <option>Hard</option>
+          </select>
+        </label>
+        <small class="error" data-for="difficultySelect"></small>
+
+        <label>Image URL (optional) <input id="imageUrl" placeholder="https://..." /></label>
+        <small class="error" data-for="imageUrl"></small>
+
+        <div class="form-actions">
+          <button type="submit" class="btn primary" id="saveBtn">Save</button>
+          <button type="button" class="btn" id="cancelBtn">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Confirm Modal -->
+  <div id="confirmModal" class="modal" aria-hidden="true">
+    <div class="modal-content" role="dialog" aria-modal="true">
+      <p id="confirmMessage">Are you sure?</p>
+      <div class="confirm-actions">
+        <button id="confirmYes" class="btn danger">Yes, delete</button>
+        <button id="confirmNo" class="btn">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div id="toast" class="toast" aria-live="polite" hidden></div>
+
+  <footer>
+      © 2025 Recipe Manager
+  </footer>
+
+  <!-- Scripts (order matters) -->
+  <script src="js/storage.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/form.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
