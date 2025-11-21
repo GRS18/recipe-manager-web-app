@@ -385,10 +385,6 @@ window.App = {
         document.getElementById("difficulty").onchange = () => this.render();
         document.getElementById("maxTime").oninput = () => this.render();
 
-        // Confirm delete
-        document.getElementById("confirmYes").onclick = () => {};
-        document.getElementById("confirmNo").onclick = () => this.closeModal("confirmModal");
-
         this.render();
     },
 
@@ -396,22 +392,33 @@ window.App = {
         document.getElementById(id).setAttribute("aria-hidden", "true");
     },
 
-    confirmDelete(id) {
-        const confirmModal = document.getElementById("confirmModal");
-        confirmModal.setAttribute("aria-hidden", "false");
+    openConfirm(id) {
+    this.currentDetailId = id;
 
-        const yesBtn = document.getElementById("confirmYes");
-        const noBtn = document.getElementById("confirmNo");
+    const confirmModal = document.getElementById("confirmModal");
+    const yesBtn = document.getElementById("confirmYes");
+    const noBtn = document.getElementById("confirmNo");
 
-        // Remove previous onclick to prevent duplicates
-        yesBtn.onclick = () => {
-            StorageAPI.remove(id);
-            Utils.showToast("Recipe deleted");
-            this.closeModal("confirmModal");
-            this.closeModal("detailModal");
-            this.render();
-        };
-        noBtn.onclick = () => this.closeModal("confirmModal");
+    confirmModal.setAttribute("aria-hidden", "false");
+
+    yesBtn.onclick = null;
+    noBtn.onclick = null;
+
+    yesBtn.onclick = () => {
+        StorageAPI.remove(id);
+        Utils.showToast("Recipe deleted");
+        this.closeModal("confirmModal");
+        this.closeModal("detailModal");
+        App.render();
+    };
+
+    noBtn.onclick = () => {
+        this.closeModal("confirmModal");
+    };
+    },
+
+    closeConfirm() {
+        document.getElementById("confirmModal").setAttribute("aria-hidden", "true");
     },
 
     getFiltered() {

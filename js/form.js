@@ -50,7 +50,7 @@ window.FormAPI = {
       preview.src = r.image || r.imageUrl || "https://via.placeholder.com/150";
       preview.style.display = "block";
     }
-  }
+    }
 
   // Fill other fields
   document.getElementById("title").value = r.title;
@@ -86,15 +86,18 @@ window.FormAPI = {
     }
 
     // ----- FIX IMAGE LOGIC -----
-    let newImage = "";
+    let imageUrl = "";
     const imgInput = document.getElementById("image");
 
     if (imgInput && imgInput.files && imgInput.files.length > 0) {
-        newImage = URL.createObjectURL(imgInput.files[0]);
+        // NEW FILE UPLOADED
+        imageUrl = URL.createObjectURL(imgInput.files[0]);
     } else if (imgInput && imgInput.value.trim() !== "") {
-        newImage = imgInput.value.trim();
+        // USER TYPED AN IMAGE URL
+        imageUrl = imgInput.value.trim();
     } else {
-        newImage = old ? old.image || old.imageUrl : "";
+        // KEEP OLD IMAGE (IMPORTANT)
+        imageUrl = old ? old.imageUrl || old.image : "";
     }
 
     const recipe = {
@@ -108,15 +111,22 @@ window.FormAPI = {
         prepTime: Number(document.getElementById("prepTime").value),
         cookTime: Number(document.getElementById("cookTime").value),
         difficulty: document.getElementById("difficultySelect").value,
-        image: newImage
+
+        // FIXED: ALWAYS USE imageUrl (your UI reads r.imageUrl)
+        imageUrl: imageUrl
     };
 
     if (id) StorageAPI.update(recipe);
     else StorageAPI.add(recipe);
 
     Utils.showToast(id ? "Recipe updated" : "Recipe added");
-    this.close();
-    App.render();
+        this.close();
+        App.render();
+
+        if (UI.currentDetailId === recipe.id) {
+            UI.openDetail(recipe.id);
+        }
+
 },
 
     open() {

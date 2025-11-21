@@ -1,5 +1,7 @@
 window.UI = {
 
+    currentDetailId: null,
+
     // ----- Modal Controls -----
     openModal(id) {
         document.getElementById(id).setAttribute("aria-hidden", "false");
@@ -47,6 +49,8 @@ window.UI = {
     },
 
 openDetail(id) {
+    UI.currentDetailId = id;   // <-- ADD THIS
+
     const r = StorageAPI.getAll().find(x => x.id === id);
 
     const top = document.querySelector("#detailModal .detail-top");
@@ -61,12 +65,18 @@ openDetail(id) {
 
 
     // SCROLL area (Description, Ingredients, Steps)
-   scroll.innerHTML = `
+    scroll.innerHTML = `
     <p><strong>Description:</strong> ${r.description}</p>
+
+    <p><strong>Preparation Time:</strong> ${r.prepTime} min</p>
+    <p><strong>Cooking Time:</strong> ${r.cookTime} min</p>
+    <p><strong>Total Time:</strong> ${Number(r.prepTime) + Number(r.cookTime)} min</p>
+
     <p><strong>Ingredients:</strong></p>
     <ul class="detail-list">
         ${r.ingredients.map(i => `<li>${i}</li>`).join("")}
     </ul>
+
     <p><strong>Steps:</strong></p>
     <ol class="detail-list">
         ${r.steps.map(s => `<li>${s}</li>`).join("")}
@@ -74,17 +84,28 @@ openDetail(id) {
 `;
 
 
+
     // RESET SCROLL POSITION
     scroll.scrollTop = 0;
 
     // ACTION buttons (Edit + Delete)
-   actions.innerHTML = `
+    actions.innerHTML = `
     <button class="btn primary" onclick="FormAPI.openEdit('${r.id}')">Edit</button>
-    <button class="btn danger" onclick="App.confirmDelete('${r.id}')">Delete</button>
+    <button class="btn danger" onclick="App.openConfirm('${r.id}')">Delete</button>
 `;
 
     this.openModal("detailModal");
+
+},
+openConfirm(id) {
+    this.currentDetailId = id;
+    document.getElementById("confirmModal").setAttribute("aria-hidden", "false");
+},
+
+closeConfirm() {
+    document.getElementById("confirmModal").setAttribute("aria-hidden", "true");
 }
+
 };
 
 // Back-to-Top button (for main page scroll)
