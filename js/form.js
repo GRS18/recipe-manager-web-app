@@ -1,3 +1,5 @@
+// form.js — Handles Add/Edit Recipe form, validation, image input, and submitting recipes.
+
 window.FormAPI = {
     form: null,
 
@@ -28,42 +30,37 @@ window.FormAPI = {
     },
 
     openEdit(id) {
-  // use getAll().find to locate recipe (safe even if StorageAPI.get doesn't exist)
-  const all = typeof StorageAPI.getAll === "function" ? StorageAPI.getAll() : [];
-  const r = all.find(x => x.id === id);
-  if (!r) return;
+        // use getAll().find to locate recipe
+        const all = typeof StorageAPI.getAll === "function" ? StorageAPI.getAll() : [];
+        const r = all.find(x => x.id === id);
+        if (!r) return;
 
-  // Fill hidden id
-  document.getElementById("recipeId").value = r.id;
+        // Fill hidden id
+        document.getElementById("recipeId").value = r.id;
 
-  // --- IMAGE INPUT: DO NOT PRE-FILL FILE INPUT ---
-  // File inputs cannot be programmatically pre-filled for security reasons.
-  // Clear the input and (optionally) show a preview of the existing image.
-  const imgInput = document.getElementById("image");
-  if (imgInput) {
-    imgInput.value = ""; // <-- safe: keep file input empty
+        const imgInput = document.getElementById("image");
+        if (imgInput) {
+            imgInput.value = "";
 
-    // OPTIONAL: if you want to show the current image to the user,
-    // add an <img id="imagePreview"> to your form HTML and set its src here:
-    const preview = document.getElementById("imagePreview");
-    if (preview) {
-      preview.src = r.image || r.imageUrl || "https://via.placeholder.com/150";
-      preview.style.display = "block";
-    }
-    }
+            const preview = document.getElementById("imagePreview");
+            if (preview) {
+            preview.src = r.image || r.imageUrl || "https://via.placeholder.com/150";
+            preview.style.display = "block";
+            }
+         }
 
-  // Fill other fields
-  document.getElementById("title").value = r.title;
-  document.getElementById("description").value = r.description;
-  document.getElementById("ingredients").value = r.ingredients.join("\n");
-  document.getElementById("steps").value = r.steps.join("\n");
-  document.getElementById("prepTime").value = r.prepTime;
-  document.getElementById("cookTime").value = r.cookTime;
-  document.getElementById("difficultySelect").value = r.difficulty;
+        // Fill other fields
+        document.getElementById("title").value = r.title;
+        document.getElementById("description").value = r.description;
+        document.getElementById("ingredients").value = r.ingredients.join("\n");
+        document.getElementById("steps").value = r.steps.join("\n");
+        document.getElementById("prepTime").value = r.prepTime;
+        document.getElementById("cookTime").value = r.cookTime;
+        document.getElementById("difficultySelect").value = r.difficulty;
 
-  document.getElementById("formTitle").textContent = "Edit Recipe";
-  this.open();
-},
+        document.getElementById("formTitle").textContent = "Edit Recipe";
+        this.open();
+    },
 
     resetForm() {
         this.form.reset();
@@ -73,59 +70,112 @@ window.FormAPI = {
     },
 
     save() {
-    const id = document.getElementById("recipeId").value;
+        const id = document.getElementById("recipeId").value;
 
-    let old = null;
-    if (id) {
-        if (typeof StorageAPI.get === "function") {
-            try { old = StorageAPI.get(id); } catch {}
+        // ------------------- VALIDATION -------------------
+        const fields = {
+            title: document.getElementById("title").value.trim(),
+            description: document.getElementById("description").value.trim(),
+            ingredients: document.getElementById("ingredients").value.trim(),
+            steps: document.getElementById("steps").value.trim(),
+            prepTime: document.getElementById("prepTime").value.trim(),
+            cookTime: document.getElementById("cookTime").value.trim(),
+            difficulty: document.getElementById("difficultySelect").value.trim(),
+        };
+
+        let valid = true;
+
+        const showError = (id, msg) => {
+            const err = document.querySelector(`small[data-for="${id}"]`);
+            if (err) err.textContent = msg;
+        };
+
+        // clear all previous messages
+        document.querySelectorAll(".error").forEach(e => e.textContent = "");
+
+        if (fields.title === "") {
+            showError("title", "Title is required");
+            valid = false;
         }
-        if (!old && typeof StorageAPI.getAll === "function") {
-            old = StorageAPI.getAll().find(x => x.id === id) || null;
+        if (fields.description.length < 10) {
+            showError("description", "Description must be at least 10 characters");
+            valid = false;
         }
-    }
-
-    // ----- FIX IMAGE LOGIC -----
-    let imageUrl = "";
-    const imgInput = document.getElementById("image");
-
-    if (imgInput && imgInput.files && imgInput.files.length > 0) {
-        // NEW FILE UPLOADED
-        imageUrl = URL.createObjectURL(imgInput.files[0]);
-    } else if (imgInput && imgInput.value.trim() !== "") {
-        // USER TYPED AN IMAGE URL
-        imageUrl = imgInput.value.trim();
-    } else {
-        // KEEP OLD IMAGE (IMPORTANT)
-        imageUrl = old ? old.imageUrl || old.image : "";
-    }
-
-    const recipe = {
-        id: id || Utils.uuid(),
-        title: document.getElementById("title").value.trim(),
-        description: document.getElementById("description").value.trim(),
-        ingredients: document.getElementById("ingredients").value
-            .split("\n").filter(x => x.trim() !== ""),
-        steps: document.getElementById("steps").value
-            .split("\n").filter(x => x.trim() !== ""),
-        prepTime: Number(document.getElementById("prepTime").value),
-        cookTime: Number(document.getElementById("cookTime").value),
-        difficulty: document.getElementById("difficultySelect").value,
-
-        // FIXED: ALWAYS USE imageUrl (your UI reads r.imageUrl)
-        imageUrl: imageUrl
-    };
-
-    if (id) StorageAPI.update(recipe);
-    else StorageAPI.add(recipe);
-
-    Utils.showToast(id ? "Recipe updated" : "Recipe added");
-        this.close();
-        App.render();
-
-        if (UI.currentDetailId === recipe.id) {
-            UI.openDetail(recipe.id);
+        if (fields.ingredients === "") {
+            showError("ingredients", "Add at least 1 ingredient");
+            valid = false;
         }
+        if (fields.steps === "") {
+            showError("steps", "Add at least 1 cooking step");
+            valid = false;
+        }
+        if (fields.prepTime === "" || Number(fields.prepTime) < 0) {
+            showError("prepTime", "Prep time must be a positive number");
+            valid = false;
+        }
+        if (fields.cookTime === "" || Number(fields.cookTime) < 0) {
+            showError("cookTime", "Cook time must be a positive number");
+            valid = false;
+        }
+        if (fields.difficulty === "") {
+            showError("difficultySelect", "Select difficulty");
+            valid = false;
+        }
+
+        // If ANY validation fails - STOP SAVE
+        if (!valid) return;
+
+        // ------------------- END VALIDATION -------------------
+
+        let old = null;
+        if (id) {
+            if (typeof StorageAPI.get === "function") {
+                try { old = StorageAPI.get(id); } catch {}
+            }
+            if (!old && typeof StorageAPI.getAll === "function") {
+                old = StorageAPI.getAll().find(x => x.id === id) || null;
+            }
+        }
+
+        let imageUrl = "";
+        const imgInput = document.getElementById("image");
+
+        if (imgInput && imgInput.files && imgInput.files.length > 0) {
+            // NEW FILE UPLOADED
+            imageUrl = URL.createObjectURL(imgInput.files[0]);
+        } else if (imgInput && imgInput.value.trim() !== "") {
+            imageUrl = imgInput.value.trim();
+        } else {
+            // KEEP OLD IMAGE (IMPORTANT)
+            imageUrl = old?.imageUrl || old?.image || "";
+
+        }
+
+        const recipe = {
+            id: id || Utils.uuid(),
+            title: document.getElementById("title").value.trim(),
+            description: document.getElementById("description").value.trim(),
+            ingredients: document.getElementById("ingredients").value
+                .split("\n").filter(x => x.trim() !== ""),
+            steps: document.getElementById("steps").value
+                .split("\n").filter(x => x.trim() !== ""),
+            prepTime: Number(document.getElementById("prepTime").value),
+            cookTime: Number(document.getElementById("cookTime").value),
+            difficulty: document.getElementById("difficultySelect").value,
+
+            imageUrl: imageUrl
+        };
+
+        if (id) StorageAPI.update(recipe);
+        else StorageAPI.add(recipe);
+
+        Utils.showToast(id ? "Recipe updated" : "Recipe added");
+            this.close();
+            App.render();
+
+            if (UI.currentDetailId === recipe.id) {
+                UI.openDetail(recipe.id);
+            }
 
 },
 

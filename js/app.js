@@ -1,3 +1,5 @@
+// app.js — Main app controller: loads initial data, applies filters, and connects UI + Storage + Form.
+
 window.App = {
     seedRecipes: [
         {
@@ -393,28 +395,28 @@ window.App = {
     },
 
     openConfirm(id) {
-    this.currentDetailId = id;
+        this.currentDetailId = id;
 
-    const confirmModal = document.getElementById("confirmModal");
-    const yesBtn = document.getElementById("confirmYes");
-    const noBtn = document.getElementById("confirmNo");
+        const confirmModal = document.getElementById("confirmModal");
+        const yesBtn = document.getElementById("confirmYes");
+        const noBtn = document.getElementById("confirmNo");
 
-    confirmModal.setAttribute("aria-hidden", "false");
+        confirmModal.setAttribute("aria-hidden", "false");
 
-    yesBtn.onclick = null;
-    noBtn.onclick = null;
+        yesBtn.onclick = null;
+        noBtn.onclick = null;
 
-    yesBtn.onclick = () => {
-        StorageAPI.remove(id);
-        Utils.showToast("Recipe deleted");
-        this.closeModal("confirmModal");
-        this.closeModal("detailModal");
-        App.render();
-    };
+        yesBtn.onclick = () => {
+            StorageAPI.remove(id);
+            Utils.showToast("Recipe deleted");
+            this.closeModal("confirmModal");
+            this.closeModal("detailModal");
+            App.render();
+        };
 
-    noBtn.onclick = () => {
-        this.closeModal("confirmModal");
-    };
+        noBtn.onclick = () => {
+            this.closeModal("confirmModal");
+        };
     },
 
     closeConfirm() {

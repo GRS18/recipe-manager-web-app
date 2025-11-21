@@ -23,23 +23,28 @@ No backend setup is required — everything runs in the browser.
 ### Structure of a Recipe Object
 ```json
 {
-  "id": "uuid-generated-string",
+  "id": "uuid-string",
   "title": "Puran Poli",
-  "description": "Maharashtrian sweet flatbread",
+  "description": "Traditional Maharashtrian sweet flatbread stuffed with sweet chana-dal filling.",
   "ingredients": [
-    "Wheat Flour - 2 cups",
-    "Chana Dal - 1.5 cups",
-    "Jaggery - 1 cup",
-    "Ghee - 2 tbsp"
+    "Wheat flour – 2 cups",
+    "Maida – 1 cup",
+    "Chana dal – 1 cup",
+    "Jaggery – 1 cup",
+    "......"
   ],
   "steps": [
-    "Mix dough",
-    "Prepare filling",
-    "Roll and cook"
+    "Cook chana dal and mix with jaggery.",
+    "Prepare soft dough using flour, oil, and turmeric.",
+    "Stuff puran inside dough and roll.",
+    "Roast on tawa with ghee."
+    "......"
   ],
+  "prepTime": 40,
+  "cookTime": 30,
+  "difficulty": "Medium",
   "category": "Dessert",
-  "image": "encoded image string (Data URI)",
-  "createdAt": "2025-02-21T10:20:30Z"
+  "image": "data:image/jpeg;encoded-string-here.."
 }
 ```
 
@@ -49,12 +54,26 @@ No backend setup is required — everything runs in the browser.
   {
     "id": "c2c45a5e-f5c8-4e9e-bef0-192aa8dc09fd",
     "title": "Puran Poli",
-    "description": "Maharashtrian sweet flatbread",
-    "ingredients": ["Wheat flour - 2 cups", "Jaggery - 1 cup"],
-    "steps": ["Knead dough", "Cook dal", "Roll poli"],
+    "description": "Traditional Maharashtrian sweet flatbread stuffed with sweet chana-dal filling.",
+    "ingredients": [
+      "Wheat flour – 2 cups",
+      "Maida – 1 cup",
+      "Chana dal – 1 cup",
+      "Jaggery – 1 cup",
+      "......"
+    ],
+    "steps": [
+      "Cook chana dal and mix with jaggery.",
+      "Prepare soft dough using flour, oil, and turmeric.",
+      "Stuff puran inside dough and roll.",
+      "Roast on tawa with ghee."
+      "......"
+    ],
+    "prepTime": 0,
+    "cookTime": 0,
+    "difficulty": "Medium",
     "category": "Dessert",
-    "image": "data:image/png;encoded-string-here",
-    "createdAt": "2025-11-21T10:15:00Z"
+    "imageUrl": "data:image/jpeg;encoded-string-here.."
   }
 ]
 ```
@@ -88,7 +107,8 @@ No backend setup is required — everything runs in the browser.
 - Works best on modern browsers (Chrome, Edge, Firefox).
 
 ## Known Issues
-These are known issues you may fix later:
+
+These are known issues may fix later:
 
 - GitHub Pages sometimes does not show updated JS/CSS due to caching → Hard refresh: Ctrl + Shift + R
 

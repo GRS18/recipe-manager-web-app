@@ -1,3 +1,5 @@
+// storage.js — Handles saving, loading, updating, and deleting recipes using localStorage.
+
 window.StorageAPI = {
     key: "recipes",
 

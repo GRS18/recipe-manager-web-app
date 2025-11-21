@@ -1,3 +1,5 @@
+// ui.js — Renders recipe cards, controls modals, and manages all UI interactions.
+
 window.UI = {
 
     currentDetailId: null,
@@ -19,21 +21,21 @@ window.UI = {
         // Always clear first
         grid.innerHTML = "";
 
-        // If no recipes → show empty state
+        // If no recipes - show empty state
         if (recipes.length === 0) {
             empty.style.display = "flex";   // show block
             empty.hidden = false;
             return;
         }
 
-        // Recipes exist → hide empty state
+        // Recipes exist - hide empty state
         empty.style.display = "none";
         empty.hidden = true;
 
         // Render cards
         grid.innerHTML = recipes.map(r => `
             <div class="card">
-                <div class="card-media" style="background-image:url('${r.imageUrl || "https://via.placeholder.com/300"}');"></div>
+                <div class="card-media" style="background-image:url('${r.imageUrl || r.image || "https://via.placeholder.com/300"}');"></div>
                 <div class="card-body">
                     <h3 class="card-title">${r.title}</h3>
                     <p class="card-desc">${r.description || ""}</p>
@@ -49,7 +51,7 @@ window.UI = {
     },
 
 openDetail(id) {
-    UI.currentDetailId = id;   // <-- ADD THIS
+    UI.currentDetailId = id;  
 
     const r = StorageAPI.getAll().find(x => x.id === id);
 
@@ -59,10 +61,9 @@ openDetail(id) {
 
     // TOP area (image + title)
     top.innerHTML = `
-    <img src="${r.imageUrl || "https://via.placeholder.com/600"}" class="detail-image" />
-    <h2 class="detail-title">${r.title}</h2>
-`;
-
+        <img src="${r.imageUrl || r.image || 'https://via.placeholder.com/600'}" class="detail-image" />
+        <h2 class="detail-title">${r.title}</h2>
+    `;
 
     // SCROLL area (Description, Ingredients, Steps)
     scroll.innerHTML = `
@@ -82,9 +83,6 @@ openDetail(id) {
         ${r.steps.map(s => `<li>${s}</li>`).join("")}
     </ol>
 `;
-
-
-
     // RESET SCROLL POSITION
     scroll.scrollTop = 0;
 
@@ -112,6 +110,7 @@ closeConfirm() {
 const backBtn = document.getElementById("backToTop");
 
 window.addEventListener("scroll", () => {
+
   // Only track main window scroll
   if (window.scrollY > 400) {
     backBtn.style.display = "flex";

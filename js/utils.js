@@ -1,3 +1,5 @@
+// utils.js — Provides helper functions like UUID generation and toast notifications.
+
 window.Utils = {
     uuid() {
         return crypto.randomUUID();
@@ -6,7 +8,6 @@ window.Utils = {
   showToast(msg) {
     const toast = document.getElementById("toast");
 
-    // remove hidden attribute if present
     toast.removeAttribute("hidden");
 
     toast.textContent = msg;

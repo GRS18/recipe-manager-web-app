@@ -1,3 +1,5 @@
+/* Complete styling for Recipe Manager: layout, cards, modals, forms, animations, and responsive design */
+
 /* Reset-ish */
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -528,16 +530,16 @@ footer {
 
 .form-actions,
 .form-actions-bottom {
-  flex-shrink: 0;                /* keep footer fixed */
-  display: flex;                 /* align buttons */
-  justify-content: flex-end;     /* push buttons to the right */
-  gap: 12px;                     /* space between buttons */
-  padding: 16px 24px;            /* add space from edges */
+  flex-shrink: 0;                
+  display: flex;               
+  justify-content: flex-end;    
+  gap: 12px;                     
+  padding: 16px 24px;          
   border-top: 1px solid rgba(0,0,0,0.1);
-  background: var(--card);       /* match modal background */
+  background: var(--card);    
 }
 
- /* Optional: reduce scrollbar width on mobile */
+ /* reduce scrollbar width on mobile */
   body::-webkit-scrollbar,
   #ingredients::-webkit-scrollbar,
   #steps::-webkit-scrollbar {
@@ -551,7 +553,6 @@ footer {
   }
 
 /* Ingredients & Steps textarea scroll */
-/* Ingredients & Steps textarea scroll */
 #ingredients,
 #steps {
   max-height: 120px;
@@ -559,10 +560,10 @@ footer {
   scroll-behavior: smooth;
   resize: vertical;
   padding: 10px;
-  border: none;                 /* remove border */
-  background: var(--card);      /* match form background */
+  border: none;                
+  background: var(--card);    
   border-radius: 12px;
-  box-shadow: inset 0 0 4px rgba(0,0,0,0.08);  /* subtle inner shadow */
+  box-shadow: inset 0 0 4px rgba(0,0,0,0.08); 
 }
 
 /* WebKit browsers (Chrome, Edge, Safari) */
@@ -603,9 +604,9 @@ footer {
 .recipe-form input,
 .recipe-form textarea,
 .recipe-form select {
-  border: none;                 /* remove border */
-  background: var(--card);      /* match form background */
-  box-shadow: inset 0 0 4px rgba(0,0,0,0.08); /* subtle inner shadow */
+  border: none;               
+  background: var(--card);      
+  box-shadow: inset 0 0 4px rgba(0,0,0,0.08); 
 }
 
 .recipe-form input:focus,
@@ -626,7 +627,7 @@ body::-webkit-scrollbar {
 }
 
 body::-webkit-scrollbar-thumb {
-  background: var(--accent2);   /* mint green like modals */
+  background: var(--accent2);  
   border-radius: 5px;
 }
 
@@ -648,4 +649,11 @@ body {
   body::-webkit-scrollbar-thumb {
     border-radius: 3px;
   }
+}
+
+.error {
+  color: #e63946;
+  font-size: 0.8rem;
+  margin-top: 4px;
+  display: block;
 }
