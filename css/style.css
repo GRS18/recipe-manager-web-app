@@ -12,7 +12,7 @@
   --accent2: #81c784;                /* mint green highlight */
   --accent3: #a5d6a7;                /* light organic green */
 
-  --danger: #c81e1e;                 /* keep chili red for delete */
+  --danger: #c81e1e;                 /* chili red for delete */
 
   --radius: 14px;
   --shadow: 0 8px 25px rgba(46, 125, 50, 0.20);  /* green shadow */
@@ -44,7 +44,6 @@ main {
 
 .app-header {
   backdrop-filter: blur(10px);
-  /* background: linear-gradient(90deg, rgba(76,201,240,0.18), rgba(76,201,240,0.05)); */
   background: linear-gradient(90deg, rgba(46,125,50,0.18), rgba(46,125,50,0.05));
   border-bottom: 1px solid rgba(0,0,0,0.07);
   position: sticky;
@@ -192,7 +191,6 @@ main {
 .badge.hard { background: #fee2e2; color: #991b1b; }
 
 /* Empty State */
-/* Empty State (fixed) */
 .empty-state {
   display: none;                    /* HIDE by default */
   flex-direction: column;
@@ -235,7 +233,7 @@ main {
   max-height: 85vh;
   display: flex;
   flex-direction: column;
-  overflow: hidden;  /* keeps scroll inside detail-scroll */
+  overflow: hidden;    /* keeps scroll inside detail-scroll */
   position: relative;
 }
 
@@ -250,7 +248,7 @@ main {
   cursor: pointer;
 }
 
-/* Confirm Modal (matches your theme) */
+/* Confirm Modal */
 #confirmModal .modal-content {
     padding: 26px;
     text-align: center;
@@ -278,7 +276,6 @@ main {
     from { transform: scale(0.85); opacity: 0; }
     to   { transform: scale(1); opacity: 1; }
 }
-
 
 /* Top section: image + title */
 .detail-top {
@@ -380,7 +377,7 @@ main {
   height: 18px;
 }
 
-/* Toast (Green Modern Theme) */
+/* Toast */
 #toast {
     position: fixed;
     bottom: 20px;
@@ -458,7 +455,7 @@ footer {
   font-size: 22px;
   font-weight: bold;
 
-  /* your theme colors */
+  /* theme colors */
   background: linear-gradient(135deg, var(--accent), var(--accent2));
   color: white;
 
@@ -477,10 +474,7 @@ footer {
   color: var(--text);
 }
 
-/* =========================
-   FORM MODAL STYLING
-   Matches detail modal layout
-   ========================= */
+/* FORM MODAL STYLING */
 
 .form-modal {
   display: flex;
