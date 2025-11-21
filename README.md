@@ -1,4 +1,4 @@
-#### Recipe Manager (HTML / CSS / JavaScript / localStorage)
+# Recipe Manager (HTML / CSS / JavaScript / localStorage)
 
 ## Overview
 This web application allows users to create, edit, view, and delete recipes.  
@@ -7,7 +7,7 @@ All data is stored in the browser using localStorage.
 
 ## Running the App
 
-# Using Live Server
+#### Using Live Server
 1. Install the Live Server extension in VS Code.
 
 2. Right-click index.html → “Open with Live Server”.
@@ -20,7 +20,7 @@ No backend setup is required — everything runs in the browser.
 - The application stores all recipes under the key: **recipes**
 - Each recipe is an object inside an array.
 
-# Structure of a Recipe Object
+### Structure of a Recipe Object
 ```json
 {
   "id": "uuid-generated-string",
@@ -43,7 +43,7 @@ No backend setup is required — everything runs in the browser.
 }
 ```
 
-# localStorage Example
+### localStorage Example
 ```json
 [
   {
