@@ -443,5 +443,11 @@ window.App = {
 
 };
 
-// Initialize
-document.addEventListener("DOMContentLoaded", () => App.init());
+// Initialize App and Timeline
+document.addEventListener("DOMContentLoaded", () => {
+    App.init();
+    UI.initReviewSlider();   // review slider
+    UI.initTimeline(); // Initialize timeline animations
+    UI.initBackToTop();      // back-to-top button
+
+});

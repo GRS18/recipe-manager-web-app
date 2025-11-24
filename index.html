@@ -1,5 +1,4 @@
 <!-- Main UI structure of Recipe Manager: layout, modals, cards, filters, and script loading -->
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -8,6 +7,7 @@
   <title>Recipe Manager</title>
   <link rel="stylesheet" href="css/style.css" />
   <meta name="description" content="Recipe Manager using Local Storage — create, read, update, delete recipes." />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer"/>
 </head>
 <body>
     <header class="app-header">
@@ -79,6 +79,74 @@
           </div>
         </section>
 
+        <!-- Food Timeline -->
+        <section class="food-timeline-section">
+          <div class="container timeline-container">
+            <h2>Healthy Rhythms</h2>
+            <div class="timeline">
+
+              <div class="timeline-step">
+                <div class="step-icon"><i class="fas fa-egg"></i></div>
+                <div class="step-content">
+                  <h3>Breakfast</h3>
+                  <p>Fuel up with protein, fiber & vibes to slay your morning.</p>
+                </div>
+              </div>
+
+              <div class="timeline-step">
+                <div class="step-icon"><i class="fas fa-leaf"></i></div>
+                <div class="step-content">
+                  <h3>Lunch</h3>
+                  <p>Stack your plate with greens, grains & lean gains.</p>
+                </div>
+              </div>
+
+              <div class="timeline-step">
+                <div class="step-icon"><i class="fas fa-utensils"></i></div>
+                <div class="step-content">
+                  <h3>Dinner</h3>
+                  <p>Keep it chill & light so your body can flex sleep mode.</p>
+                </div>
+              </div>
+
+              <div class="timeline-step">
+                <div class="step-icon"><i class="fas fa-apple-alt"></i></div>
+                <div class="step-content">
+                  <h3>Snacks</h3>
+                  <p>Go fruits, nuts, or yogurt—say bye to boring snacks.</p>
+                </div>
+              </div>
+
+              <div class="timeline-step">
+                <div class="step-icon"><i class="fas fa-tint"></i></div>
+                <div class="step-content">
+                  <h3>Hydration</h3>
+                  <p>Sip water like a boss, keep your mind & body lit.</p>
+                </div>
+              </div>
+            </div>
+
+             <!-- Right-side Hero Decorative Plate with floating plates -->
+            <div class="timeline-right-hero">
+              <!-- Main Big Plate -->
+              <svg class="hero-plate big-plate" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="200" cy="200" r="200" fill="rgba(46, 125, 50, 0.1)" />
+                <circle cx="120" cy="150" r="20" fill="#81c784" />
+                <circle cx="220" cy="100" r="25" fill="#a5d6a7" />
+                <circle cx="280" cy="180" r="30" fill="#2e7d32" />
+              </svg>
+
+              <!-- Mini Plate (South-West) -->
+              <svg class="hero-plate mini-plate" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="100" cy="100" r="80" fill="rgba(46, 125, 50, 0.08)" />
+                <circle cx="60" cy="80" r="12" fill="#81c784" />
+                <circle cx="100" cy="50" r="15" fill="#a5d6a7" />
+                <circle cx="140" cy="110" r="10" fill="#2e7d32" />
+              </svg>
+            </div>
+          </div>
+        </section>
+
         <!-- Details Modal -->
         <div id="detailModal" class="modal">
           <div class="modal-content">
@@ -113,7 +181,7 @@
                 <label>Description <textarea id="description" rows="3"></textarea></label>
                 <small class="error" data-for="description"></small>
 
-                <label>Image URL <input id="image" type="file" accept="image/*"></label>
+                <label>Image File <input id="image" type="file" accept="image/*"></label>
                 <small class="error" data-for="image"></small>
 
                 <label>Ingredients (one per line)
@@ -174,9 +242,24 @@
     <!-- Back To Top -->
     <button id="backToTop" class="back-to-top">↑</button>
 
-    <footer>
-        © 2025 Recipe Manager by GRS
-    </footer>
+<footer>
+    <span class="sanskrit-quote">
+        सर्वे भवन्तु सुखिनः, सर्वे सन्तु निरामयाः।<br>
+        सर्वे भद्राणि पश्यन्तु, मा कश्चिद्दुःखभाग्भवेत्।
+    </span>
+    © 2025 Recipe Manager by GRS 
+
+     <!-- Leaf animation container -->
+    <div class="leaf-container">
+        <span class="leaf">🍃</span>
+        <span class="leaf">🍃</span>
+        <span class="leaf">🍃</span>
+        <span class="leaf">🍃</span>
+        <span class="leaf">🍃</span>
+        <span class="leaf">🍃</span>
+        <span class="leaf">🍃</span>
+    </div>
+</footer>
 
     <!-- Scripts (order matters) -->
     <script src="js/storage.js"></script>

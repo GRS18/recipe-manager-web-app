@@ -102,57 +102,75 @@ openConfirm(id) {
 
 closeConfirm() {
     document.getElementById("confirmModal").setAttribute("aria-hidden", "true");
+},
+
+//------- REVIEW SLIDER SCRIPT -------------------
+ initReviewSlider() {
+    const track = document.getElementById("reviewsTrack");
+
+    // Duplicate items for seamless infinite scroll
+    track.innerHTML += track.innerHTML;
+
+    let speed = 1; // scrolling speed
+    let position = 0;
+    let paused = false;
+
+    function scrollTrack() {
+    if (!paused) {
+        position -= speed;
+        if (Math.abs(position) >= track.scrollWidth / 2) {
+        position = 0; // reset when half completed
+        }
+        track.style.transform = `translateX(${position}px)`;
+    }
+    requestAnimationFrame(scrollTrack);
+    }
+
+    track.addEventListener("mouseenter", () => paused = true);
+    track.addEventListener("mouseleave", () => paused = false);
+
+    scrollTrack();
+},
+
+// Inside window.UI in ui.js
+initTimeline() {
+    const timelineSteps = document.querySelectorAll('.timeline-step');
+
+    const timelineObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            const step = entry.target;
+
+            if (entry.isIntersecting) {
+                // Remove fade-out and show visible
+                step.classList.remove('fade-out');
+                step.classList.add('visible');
+            } else {
+                // Only steps not visible get fade-out with delay
+                step.classList.remove('visible');
+                step.classList.add('fade-out');
+            }
+        });
+    }, { threshold: 0.7 }); // 70% visible triggers intersection
+
+    timelineSteps.forEach(step => timelineObserver.observe(step));
+},
+
+// Back-to-Top button (for main page scroll)
+initBackToTop() {
+    const backBtn = document.getElementById("backToTop");
+
+        window.addEventListener("scroll", () => {
+            backBtn.style.display = window.scrollY > 400 ? "flex" : "none";
+        });
+
+        backBtn.addEventListener("click", () => {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        });
 }
 
 };
-
-// Back-to-Top button (for main page scroll)
-const backBtn = document.getElementById("backToTop");
-
-window.addEventListener("scroll", () => {
-
-  // Only track main window scroll
-  if (window.scrollY > 400) {
-    backBtn.style.display = "flex";
-  } else {
-    backBtn.style.display = "none";
-  }
-});
-
-backBtn.addEventListener("click", () => {
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth"
-  });
-});
-
 // Close modal buttons
 document.getElementById("detailClose").onclick = () => UI.closeModal("detailModal");
 document.getElementById("formClose").onclick = () => UI.closeModal("formModal");
 
-//------- REVIEW SLIDER SCRIPT -------------------
-const track = document.getElementById("reviewsTrack");
-
-// Duplicate items for seamless infinite scroll
-track.innerHTML += track.innerHTML;
-
-let speed = 1; // scrolling speed
-let position = 0;
-let paused = false;
-
-function scrollTrack() {
-  if (!paused) {
-    position -= speed;
-    if (Math.abs(position) >= track.scrollWidth / 2) {
-      position = 0; // reset when half completed
-    }
-    track.style.transform = `translateX(${position}px)`;
-  }
-  requestAnimationFrame(scrollTrack);
-}
-
-track.addEventListener("mouseenter", () => paused = true);
-track.addEventListener("mouseleave", () => paused = false);
-
-scrollTrack();
 

@@ -403,13 +403,60 @@ main {
 
 /* Footer */
 footer {
-  margin-top: 40px;
-  padding: 20px 0;
+  margin-top: 7px;
+  padding: 30px 0;
   text-align: center;
   font-size: 0.9rem;
   border-top: 1px solid rgba(0,0,0,0.08);
   background: linear-gradient(90deg, rgba(46,125,50,0.18), rgba(46,125,50,0.05));
   color: var(--text);
+}
+
+/* Sanskrit Quote Styling */
+footer .sanskrit-quote {
+    display: block;
+    font-family: 'Noto Sans Devanagari', sans-serif;
+    font-weight: 700;         
+    color: var(--accent);      
+    font-size: 0.9rem;
+    line-height: 1.4;
+    margin-top: 8px;
+    letter-spacing: 0.5px;
+    text-align: center;
+    position: relative;
+}
+
+/* Leaf Animation Container */
+footer .leaf-container {
+    position: relative;
+    width: 100%;
+    height: 40px;
+    overflow: visible;
+    pointer-events: none;
+}
+
+/* Individual Leaf */
+footer .leaf-container .leaf {
+    position: absolute;
+    top: -20px;
+    font-size: 1.2rem;
+    color: var(--accent2);
+    animation: fall 5s linear infinite;
+    opacity: 0.8;
+}
+
+/* Animate leaves at different positions and speeds */
+footer .leaf-container .leaf:nth-child(1) { left: 10%; animation-duration: 6s; animation-delay: 0s; }
+footer .leaf-container .leaf:nth-child(2) { left: 25%; animation-duration: 5s; animation-delay: 1s; }
+footer .leaf-container .leaf:nth-child(3) { left: 50%; animation-duration: 7s; animation-delay: 0.5s; }
+footer .leaf-container .leaf:nth-child(4) { left: 70%; animation-duration: 6.5s; animation-delay: 0.7s; }
+footer .leaf-container .leaf:nth-child(5) { left: 85%; animation-duration: 5.5s; animation-delay: 0.3s; }
+
+/* Leaf Falling Animation */
+@keyframes fall {
+    0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+    20% { opacity: 1; }
+    100% { transform: translateY(40px) rotate(360deg); opacity: 0; }
 }
 
 /* Responsive */
@@ -437,6 +484,44 @@ footer {
   #detailContent img {
     height: 180px;
   }
+
+.timeline {
+  margin-left: 50px; 
+  gap: 30px;
+}
+
+.timeline-step {
+  flex-direction: row; 
+  align-items: flex-start;
+  gap: 12px;          
+}
+
+.timeline::before {
+  left: 25px;         
+  width: 3px;        
+}
+
+.step-icon {
+  width: 36px;
+  height: 36px;
+  font-size: 1rem;
+  flex-shrink: 0;
+  z-index: 1;         
+}
+
+.step-content {
+  margin-left: 0;    
+}
+
+.step-content h3 {
+  font-size: 1rem;
+}
+
+.step-content p {
+  font-size: 0.85rem;
+  word-break: break-word; 
+}
+
 }
 
 /* Large Desktop Improvements */
@@ -668,11 +753,17 @@ body {
   padding: 40px 0;
   margin: 35px 0 10px 0; 
 
-  background: linear-gradient(
+  /* background: linear-gradient(
       90deg,
       rgba(46, 125, 50, 0.05),
       rgba(46, 125, 50, 0.10),
       rgba(46, 125, 50, 0.05)
+  ); */
+
+    background: linear-gradient(
+    -50deg,
+    rgba(46, 125, 50, 0.2),    /* accent green */
+    rgba(165, 214, 167, 0.08)  /* light accent3 */
   );
 
   border-radius: 12px;
@@ -685,7 +776,7 @@ body {
   max-width: 100%;
   overflow-x: hidden;
   overflow: hidden;
-   padding: 0 60px;
+  padding: 0 60px;
 }
 
 .rm-reviews-track {
@@ -723,4 +814,221 @@ body {
   font-size: 1.0rem;
   color: var(--text);
   white-space: nowrap; 
+}
+
+/* Food Timeline css */
+.food-timeline-section {
+  position: relative;
+  overflow-x: hidden !important;
+  padding: 60px 0 20px 0; 
+  background: linear-gradient(100deg, rgba(46,125,50,0.1), rgba(46,125,50,0.05));
+}
+
+.timeline-container h2 {
+  text-align: center;
+  font-size: 1.9rem;
+  color: var(--accent);
+  margin-bottom: 50px;
+  position: relative;
+}
+
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  position: relative;
+  margin-left: 50px;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 25px;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: var(--accent2);
+  border-radius: 2px;
+}
+
+.timeline-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 25px;
+  opacity: 0;
+  transform: translateX(-50px);
+  transition: all 0.8s ease;
+}
+
+.timeline-step.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.timeline-step.fade-out {
+  opacity: 0;
+  transform: translateX(-50px);
+  transition: all 0.4s ease;
+}
+
+.step-icon {
+  width: 50px;
+  height: 50px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 1.4rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(46,125,50,0.25);
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.step-icon:hover {
+  transform: scale(1.15);
+  background: var(--accent2);
+}
+
+.step-content h3 {
+  margin: 0 0 6px 0;
+  font-size: 1.3rem;
+  color: var(--accent);
+}
+
+.step-content p {
+  margin: 0;
+  color: var(--text);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.timeline-right-hero {
+  position: absolute;
+  top: 50%;
+  right: -100px; 
+  transform: translateY(-50%);
+  width: 400px;
+  height: 400px;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Common Hero Plate Styles */
+.hero-plate {
+  position: absolute;
+  transform-origin: center;
+}
+
+/* Big Plate Animation */
+.big-plate {
+  width: 350px;
+  height: 350px;
+  right: 0;
+  top: 0;
+  animation: floatBig 8s ease-in-out infinite alternate;
+  transform: rotate(-15deg);
+}
+
+/* Mini Plate Animation (floating separately) */
+.mini-plate {
+  width: 180px;
+  height: 180px;
+  left: -60px;  /* South-West position */
+  bottom: -40px;
+  animation: floatMini 10s ease-in-out infinite alternate;
+  transform: rotate(10deg);
+}
+
+/* Animations */
+@keyframes floatBig {
+  0%   { transform: rotate(-15deg) translateY(0) scale(1); }
+  50%  { transform: rotate(-12deg) translateY(-10px) scale(1.05); }
+  100% { transform: rotate(-15deg) translateY(0) scale(1); }
+}
+
+@keyframes floatMini {
+  0%   { transform: rotate(10deg) translateY(0) scale(1); }
+  50%  { transform: rotate(12deg) translateY(-8px) scale(1.02); }
+  100% { transform: rotate(10deg) translateY(0) scale(1); }
+}
+
+
+/* Large screens: above 1400px */
+@media (min-width: 1400px) {
+  .timeline {
+    margin-left: 60px;
+    gap: 60px;    
+  }
+
+  .timeline-step {
+    gap: 30px;
+  }
+
+  .step-icon {
+    width: 60px;
+    height: 60px;
+    font-size: 1.6rem;
+  }
+
+  .step-content h3 {
+    font-size: 1.5rem;
+  }
+
+  .step-content p {
+    font-size: 1rem;
+  }
+}
+
+/* MOBILE FIX: max-width 700px */
+@media (max-width: 700px) {
+
+  /* Remove hero plates entirely on mobile */
+  .timeline-right-hero {
+    display: none !important;
+  }
+
+  .timeline {
+    margin-left: 0 !important;      
+    padding-left: 20px;              
+    gap: 40px;                       
+  }
+
+  .timeline::before {
+    left: 10px !important;           
+    width: 3px;
+  }
+
+  .timeline-step {
+    flex-direction: row;              
+    align-items: flex-start;
+    gap: 12px;
+    transform: translateX(0) !important;
+    opacity: 1 !important;
+  }
+
+  .step-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+  }
+
+  .step-content {
+    margin-left: 0 !important;
+    flex: 1;                        
+  }
+
+  .step-content h3 {
+    font-size: 1.1rem;
+  }
+
+  .step-content p {
+    font-size: 0.85rem;
+    line-height: 1.4;
+  }
+
+  .food-timeline-section {
+    overflow-x: hidden !important;
+  }
 }
