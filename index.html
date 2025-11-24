@@ -40,7 +40,46 @@
           </div>
         </section>
 
+        <section class="rm-reviews-wrap">
+          <div class="rm-reviews-container">
+            <div class="rm-reviews-track" id="reviewsTrack">
+              <div class="rm-review">
+                <span class="rm-avatar">AP</span>
+                <div class="rm-review-text">“तुझ्या पुरणपोळीची रेसिपी अगदी सणासुदीची झाली! घरचाच स्वाद 😍” — आर्या पाटील</div>
+              </div>
+              <div class="rm-review">
+                <span class="rm-avatar">RV</span>
+                <div class="rm-review-text">“Ukadiche Modak instructions were so simple! Ganpati special ready in minutes 🙏✨” — Rohan Vaze</div>
+              </div>
+              <div class="rm-review">
+                <span class="rm-avatar">NS</span>
+                <div class="rm-review-text">“Vada Pav finally tasted like Mumbai street style 🌧️🍔” — Neha Satpute</div>
+              </div>
+              <div class="rm-review">
+                <span class="rm-avatar">JD</span>
+                <div class="rm-review-text">“कोथिंबीर वडी कुरकुरीत झाली. परफेक्ट संध्याकाळीचे स्नॅक ☕✨” — ज्योती दळवी</div>
+              </div>
+              <div class="rm-review">
+                <span class="rm-avatar">NK</span>
+                <div class="rm-review-text">“पिठलं भाकरी भारी झाली! पहिल्यांदाच करून बघितलं 😄👌” — नीलम काकडे</div>
+              </div>
+              <div class="rm-review">
+                <span class="rm-avatar">HK</span>
+                <div class="rm-review-text">“Love how each recipe has clean steps. My Puran Poli was perfect today 🙌💛” — Harshada K</div>
+              </div>
+              <div class="rm-review">
+                <span class="rm-avatar">SK</span>
+                <div class="rm-review-text">“Your Puran Poli recipe is just wow! अगदी आजीच्या हातची चव 😍” — Snehal Kamat</div>
+              </div>
+              <div class="rm-review">
+                <span class="rm-avatar">SS</span>
+                <div class="rm-review-text">“Misal Pav recipe 🔥 एकदम spicy आणि tasty!” — Shreyas Sarode</div>
+              </div>
+            </div>
+          </div>
+        </section>
 
+        <!-- Details Modal -->
         <div id="detailModal" class="modal">
           <div class="modal-content">
             <button class="modal-close" id="detailClose">✕</button>
@@ -90,10 +129,11 @@
                 <div class="two-col">
                   <label>Prep time (min)
                     <input id="prepTime" type="number" min="0" required />
+                    <small class="error" data-for="prepTime"></small>
                   </label>
-
                   <label>Cook time (min)
                     <input id="cookTime" type="number" min="0" required />
+                     <small class="error" data-for="cookTime"></small>
                   </label>
                 </div>
 

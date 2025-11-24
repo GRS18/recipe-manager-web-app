@@ -97,6 +97,10 @@ window.FormAPI = {
             showError("title", "Title is required");
             valid = false;
         }
+        if (/[0-9]/.test(fields.title)) {
+            showError("title", "Title cannot contain numbers");
+            valid = false;
+        }
         if (fields.description.length < 10) {
             showError("description", "Description must be at least 10 characters");
             valid = false;
@@ -109,12 +113,12 @@ window.FormAPI = {
             showError("steps", "Add at least 1 cooking step");
             valid = false;
         }
-        if (fields.prepTime === "" || Number(fields.prepTime) < 0) {
-            showError("prepTime", "Prep time must be a positive number");
+        else if (Number(fields.prepTime) <= 0) {
+            showError("prepTime", "Prep time must be greater than 0");
             valid = false;
         }
-        if (fields.cookTime === "" || Number(fields.cookTime) < 0) {
-            showError("cookTime", "Cook time must be a positive number");
+        else if (Number(fields.cookTime) <= 0) {
+            showError("cookTime", "Cook time must be greater than 0");
             valid = false;
         }
         if (fields.difficulty === "") {

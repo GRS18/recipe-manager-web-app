@@ -41,7 +41,7 @@ window.App = {
             ],
             prepTime: 40,
             cookTime: 30,
-            difficulty: "Medium",
+            difficulty: "Hard",
             imageUrl: "assets/images/PuranPoli.jpg"
         },
         {
@@ -116,7 +116,7 @@ window.App = {
                 "Place modaks and steam for 12–15 minutes.",
                 "Remove and apply a little ghee on top before serving."
             ],
-            prepTime: 25,
+            prepTime: 30,
             cookTime: 20,
             difficulty: "Medium",
             imageUrl: "assets/images/UkadicheMoadak.jpg"
@@ -177,8 +177,8 @@ window.App = {
                 "Serve with fried green chilies and extra chutney."
             ],
             prepTime: 20,
-            cookTime: 25,
-            difficulty: "Medium",
+            cookTime: 15,
+            difficulty: "Easy",
             imageUrl: "assets/images/VadaPav.jpg"
         },
         {
@@ -218,9 +218,9 @@ window.App = {
                 "Place vadis on the pan and fry until golden brown and crisp on both sides.",
                 "Remove and serve hot with chutney or ketchup."
             ],
-            prepTime: 15,
-            cookTime: 20,
-            difficulty: "Easy",
+            prepTime: 20,
+            cookTime: 25,
+            difficulty: "Medium",
             imageUrl: "assets/images/KothambirVadi.jpg"
         },
         {
@@ -270,8 +270,8 @@ window.App = {
                 "To assemble: In a bowl add cooked misal, top with chopped onion, fresh coriander, lots of farsan, and a squeeze of lemon.",
                 "Serve hot with pav toasted on tawa with butter."
             ],
-            prepTime: 15,
-            cookTime: 25,
+            prepTime: 25,
+            cookTime: 20,
             difficulty: "Medium",
             imageUrl: "assets/images/MisalPav.jpg"
         },
@@ -321,7 +321,7 @@ window.App = {
             ],
             prepTime: 20,
             cookTime: 25,
-            difficulty: "Easy",
+            difficulty: "Medium",
             imageUrl: "assets/images/PavBhajii.jpg"
         },
         {
@@ -371,8 +371,8 @@ window.App = {
                 "Serve hot bhakri with steaming pithla, onions, and green chili."
             ],
             prepTime: 15,
-            cookTime: 20,
-            difficulty: "Easy",
+            cookTime: 25,
+            difficulty: "Medium",
             imageUrl: "assets/images/PithlaBhakri.jpg"
         }
 

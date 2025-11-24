@@ -129,3 +129,30 @@ backBtn.addEventListener("click", () => {
 // Close modal buttons
 document.getElementById("detailClose").onclick = () => UI.closeModal("detailModal");
 document.getElementById("formClose").onclick = () => UI.closeModal("formModal");
+
+//------- REVIEW SLIDER SCRIPT -------------------
+const track = document.getElementById("reviewsTrack");
+
+// Duplicate items for seamless infinite scroll
+track.innerHTML += track.innerHTML;
+
+let speed = 1; // scrolling speed
+let position = 0;
+let paused = false;
+
+function scrollTrack() {
+  if (!paused) {
+    position -= speed;
+    if (Math.abs(position) >= track.scrollWidth / 2) {
+      position = 0; // reset when half completed
+    }
+    track.style.transform = `translateX(${position}px)`;
+  }
+  requestAnimationFrame(scrollTrack);
+}
+
+track.addEventListener("mouseenter", () => paused = true);
+track.addEventListener("mouseleave", () => paused = false);
+
+scrollTrack();
+

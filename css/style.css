@@ -418,10 +418,12 @@ footer {
     flex-direction: column;
     gap: 14px;
     align-items: stretch;
+    padding: 0 8px;
   }
   
   .header-actions {
     width: 100%;
+    gap: 8px;
   }
 
   .search, .select, .small-input {
@@ -656,4 +658,69 @@ body {
   font-size: 0.8rem;
   margin-top: 4px;
   display: block;
+}
+
+/* Review Slider */
+.rm-reviews-wrap {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  padding: 40px 0;
+  margin: 35px 0 10px 0; 
+
+  background: linear-gradient(
+      90deg,
+      rgba(46, 125, 50, 0.05),
+      rgba(46, 125, 50, 0.10),
+      rgba(46, 125, 50, 0.05)
+  );
+
+  border-radius: 12px;
+  box-shadow: 0 4px 14px rgba(46,125,50,0.12);
+  overflow: hidden;
+}
+
+.rm-reviews-container {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  overflow: hidden;
+   padding: 0 60px;
+}
+
+.rm-reviews-track {
+  display: flex;
+  gap: 40px;
+  white-space: nowrap;
+  will-change: transform;
+}
+
+.rm-review {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 0;
+  background: transparent;
+  white-space: nowrap;
+}
+
+/* Avatar aesthetic */
+.rm-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+/* Text */
+.rm-review-text {
+  font-size: 1.0rem;
+  color: var(--text);
+  white-space: nowrap; 
 }
