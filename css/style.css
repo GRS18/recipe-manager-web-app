@@ -125,7 +125,7 @@ main {
 }
 
 /* Cards Grid */
-.list-section { padding: 28px 0; }
+.list-section { padding: 15px 0; }
 
 .cards-grid {
   display: grid;
@@ -764,7 +764,7 @@ body {
   max-width: 100%;
   overflow-x: hidden;
   padding: 40px 0;
-  margin: 35px 0 10px 0; 
+  margin: 10px 0 10px 0; 
   background: linear-gradient(
     -50deg,
     rgba(46, 125, 50, 0.2),    /* accent green */

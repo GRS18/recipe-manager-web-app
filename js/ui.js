@@ -167,10 +167,7 @@ initBackToTop() {
             window.scrollTo({ top: 0, behavior: "smooth" });
         });
 }
-
 };
 // Close modal buttons
 document.getElementById("detailClose").onclick = () => UI.closeModal("detailModal");
 document.getElementById("formClose").onclick = () => UI.closeModal("formModal");
-
-
