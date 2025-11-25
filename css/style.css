@@ -402,9 +402,10 @@ main {
 }
 
 /* Footer */
+/* Footer */
 footer {
   margin-top: 7px;
-  padding: 30px 0;
+  padding: 18px 0;      
   text-align: center;
   font-size: 0.9rem;
   border-top: 1px solid rgba(0,0,0,0.08);
@@ -412,51 +413,63 @@ footer {
   color: var(--text);
 }
 
-/* Sanskrit Quote Styling */
-footer .sanskrit-quote {
-    display: block;
-    font-family: 'Noto Sans Devanagari', sans-serif;
-    font-weight: 700;         
-    color: var(--accent);      
-    font-size: 0.9rem;
-    line-height: 1.4;
-    margin-top: 8px;
-    letter-spacing: 0.5px;
-    text-align: center;
-    position: relative;
+/* Handwritten quote — tighter spacing */
+.handwritten-note {
+  font-family: "Lucida Handwriting", "Bradley Hand", cursive;
+  font-size: clamp(0.85rem, 2.6vw, 1.2rem);  
+  line-height: 1.4;
+  margin: 10px auto 12px; 
+  opacity: 0.9;
+  max-width: 90%;
+  text-align: center;
 }
 
-/* Leaf Animation Container */
+/* Smaller leaf animation area */
 footer .leaf-container {
     position: relative;
     width: 100%;
-    height: 40px;
+    height: 28px;         
     overflow: visible;
     pointer-events: none;
+    margin-top: 6px;     
 }
 
 /* Individual Leaf */
 footer .leaf-container .leaf {
     position: absolute;
-    top: -20px;
-    font-size: 1.2rem;
+    top: -18px;
+    font-size: 1rem;       /* smaller leaves */
     color: var(--accent2);
     animation: fall 5s linear infinite;
     opacity: 0.8;
 }
 
-/* Animate leaves at different positions and speeds */
+/* Animate leaves */
 footer .leaf-container .leaf:nth-child(1) { left: 10%; animation-duration: 6s; animation-delay: 0s; }
 footer .leaf-container .leaf:nth-child(2) { left: 25%; animation-duration: 5s; animation-delay: 1s; }
 footer .leaf-container .leaf:nth-child(3) { left: 50%; animation-duration: 7s; animation-delay: 0.5s; }
 footer .leaf-container .leaf:nth-child(4) { left: 70%; animation-duration: 6.5s; animation-delay: 0.7s; }
 footer .leaf-container .leaf:nth-child(5) { left: 85%; animation-duration: 5.5s; animation-delay: 0.3s; }
 
-/* Leaf Falling Animation */
+/* Smooth Falling Animation */
 @keyframes fall {
-    0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+    0% { transform: translateY(-30px) rotate(0deg); opacity: 0; }
     20% { opacity: 1; }
     100% { transform: translateY(40px) rotate(360deg); opacity: 0; }
+}
+
+.handwritten-note {
+  font-family: "Lucida Handwriting", "Bradley Hand", cursive;
+  font-size: clamp(0.9rem, 3vw, 1.3rem);
+  color: #2b402f;
+  line-height: 1.55;
+  letter-spacing: 0.5px;
+  font-weight: 500;
+  text-shadow: 0 1px 1px rgba(0,0,0,0.05);
+  margin: 20px auto;
+  text-align: center;
+  opacity: 0.9;
+  max-width: 90%;
 }
 
 /* Responsive */
@@ -752,15 +765,7 @@ body {
   overflow-x: hidden;
   padding: 40px 0;
   margin: 35px 0 10px 0; 
-
-  /* background: linear-gradient(
-      90deg,
-      rgba(46, 125, 50, 0.05),
-      rgba(46, 125, 50, 0.10),
-      rgba(46, 125, 50, 0.05)
-  ); */
-
-    background: linear-gradient(
+  background: linear-gradient(
     -50deg,
     rgba(46, 125, 50, 0.2),    /* accent green */
     rgba(165, 214, 167, 0.08)  /* light accent3 */
